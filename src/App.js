@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import SpecialPage from "./components/SpecialPage";
+import HomePage from "./components/HomePage";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
 
 function App() {
+
+  const [activePage,setActivePage] = useState("home")
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app" className={`bg-homeDesktop min-h-screen font-barlow text-customWhite bg-cover bg-no-repeat w-desktopW`}>
+      <BrowserRouter>
+      <Navbar activePage={activePage} setActivePage={setActivePage}/>
+
+      <Routes>
+
+        <Route path="/" exact element={<HomePage/>} />
+        <Route path="/:page" element={<SpecialPage setActivePage={setActivePage}  />} />
+        
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
